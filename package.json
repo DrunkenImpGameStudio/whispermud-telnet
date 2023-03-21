@@ -1,11 +1,11 @@
 {
-  "name": "ranvier-bundle-telnet",
+  "name": "whispermud-telnet",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "author": "Shawn Biddle <shawncplus@gmail.com>",
+  "author": "Naughty Mole Games",
   "license": "MIT",
   "dependencies": {
-    "ranvier-telnet": "^1.0.1"
+    "whispermud-telnet": "drunkenimpgamestudio/whispermud-telnet"
   }
 }

@@ -1,7 +1,7 @@
 'use strict';
 
-const Telnet = require('ranvier-telnet');
-const { Logger } = require('ranvier');
+const Telnet = require('whispermud-telnet');
+const { Logger } = require('whispermud');
 const TelnetStream = require('../lib/TelnetStream');
 
 module.exports = {
@@ -36,7 +36,7 @@ module.exports = {
         stream.write("Connecting...\n");
         Logger.log("User connected...");
 
-        // @see: bundles/ranvier-events/events/login.js
+        // @see: bundles/whispermud-events/events/login.js
         stream.emit('intro', stream);
       }).netServer;
 
