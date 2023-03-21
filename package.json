@@ -4,8 +4,5 @@
   "description": "",
   "main": "index.js",
   "author": "Naughty Mole Games",
-  "license": "MIT",
-  "dependencies": {
-    "whispermud-telnet": "drunkenimpgamestudio/whispermud-telnet"
-  }
+  "license": "MIT"
 }
