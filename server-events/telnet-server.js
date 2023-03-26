@@ -1,6 +1,5 @@
 'use strict';
 
-const Telnet = require('whispermud-core');
 const Core = require('whispermud-core');
 const TelnetStream = require('../lib/TelnetStream');
 
@@ -13,7 +12,7 @@ module.exports = {
       let server = new Core.TelnetServer(rawSocket => {
         let telnetSocket = new Core.TelnetSocket();
         telnetSocket.attach(rawSocket);
-        telnetSocket.telnetCommand(Telnet.Sequences.WILL, Telnet.Options.OPT_EOR);
+        telnetSocket.telnetCommand(Core.TelnetSequences.WILL, Core.TelentOptions.OPT_EOR);
 
         const stream = new TelnetStream();
         stream.attach(telnetSocket);
@@ -24,7 +23,7 @@ module.exports = {
 
         stream.on('error', err => {
           if (err.errno === 'EPIPE') {
-            return Logger.error('EPIPE on write. A websocket client probably connected to the telnet port.');
+            return Core.Logger.error('EPIPE on write. A websocket client probably connected to the telnet port.');
           }
 
           Core.Logger.error(err);
