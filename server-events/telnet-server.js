@@ -1,9 +1,7 @@
 'use strict';
 
-const { Logger, Telnet } = require('whispermud-core');
-const TelnetServer = require('whispermud-core').TelnetServer;
-const TelnetSocket = require('whispermud-core').TelnetSocket;
-
+const Telnet = require('whispermud-core').Telnet;
+const { Logger } = require('whispermud-core');
 const TelnetStream = require('../lib/TelnetStream');
 
 module.exports = {
@@ -12,8 +10,8 @@ module.exports = {
       /**
       * Effectively the 'main' game loop but not really because it's a REPL
       */
-      let server = new TelnetServer(rawSocket => {
-        let telnetSocket = new TelnetSocket();
+      let server = new Telnet.TelnetServer(rawSocket => {
+        let telnetSocket = new Telnet.TelnetSocket();
         telnetSocket.attach(rawSocket);
         telnetSocket.telnetCommand(Telnet.Sequences.WILL, Telnet.Options.OPT_EOR);
 
@@ -38,7 +36,7 @@ module.exports = {
         stream.write("Connecting...\n");
         Logger.log("User connected...");
 
-        // @see: bundles/whispermud-events/events/login.js
+        // @see: bundles/ranvier-events/events/login.js
         stream.emit('intro', stream);
       }).netServer;
 
