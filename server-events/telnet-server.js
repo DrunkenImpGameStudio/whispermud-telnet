@@ -1,7 +1,7 @@
 'use strict';
 
-const Telnet = require('whispermud-telnet-core');
-const { Logger } = require('whispermud-core');
+const Telnet = require('whispermud-core');
+const Core = require('whispermud-core');
 const TelnetStream = require('../lib/TelnetStream');
 
 module.exports = {
@@ -10,8 +10,8 @@ module.exports = {
       /**
       * Effectively the 'main' game loop but not really because it's a REPL
       */
-      let server = new Telnet.TelnetServer(rawSocket => {
-        let telnetSocket = new Telnet.TelnetSocket();
+      let server = new Core.TelnetServer(rawSocket => {
+        let telnetSocket = new Core.TelnetSocket();
         telnetSocket.attach(rawSocket);
         telnetSocket.telnetCommand(Telnet.Sequences.WILL, Telnet.Options.OPT_EOR);
 
@@ -27,14 +27,14 @@ module.exports = {
             return Logger.error('EPIPE on write. A websocket client probably connected to the telnet port.');
           }
 
-          Logger.error(err);
+          Core.Logger.error(err);
         });
 
         // Register all of the input events (login, etc.)
         state.InputEventManager.attach(stream);
 
         stream.write("Connecting...\n");
-        Logger.log("User connected...");
+        Core.Logger.log("User connected...");
 
         // @see: bundles/whispermud-events/events/login.js
         stream.emit('intro', stream);
@@ -43,19 +43,19 @@ module.exports = {
       // Start the server and setup error handlers.
       server.listen(commander.port).on('error', err => {
         if (err.code === 'EADDRINUSE') {
-          Logger.error(`Cannot start server on port ${commander.port}, address is already in use.`);
-          Logger.error("Do you have a MUD server already running?");
+          Core.Logger.error(`Cannot start server on port ${commander.port}, address is already in use.`);
+          Core.Logger.error("Do you have a MUD server already running?");
         } else if (err.code === 'EACCES') {
-          Logger.error(`Cannot start server on port ${commander.port}: permission denied.`);
-          Logger.error("Are you trying to start it on a priviledged port without being root?");
+          Core.Logger.error(`Cannot start server on port ${commander.port}: permission denied.`);
+          Core.Logger.error("Are you trying to start it on a priviledged port without being root?");
         } else {
-          Logger.error("Failed to start MUD server:");
-          Logger.error(err);
+          Core.Logger.error("Failed to start MUD server:");
+          Core.Logger.error(err);
         }
         process.exit(1);
       });
 
-      Logger.log(`Telnet server started on port: ${commander.port}...`);
+      Core.Logger.log(`Telnet server started on port: ${commander.port}...`);
     },
 
     shutdown: state => function () {
