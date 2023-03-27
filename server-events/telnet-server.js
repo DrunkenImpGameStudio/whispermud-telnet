@@ -2,6 +2,8 @@
 
 const { TelnetServer } = require('whispermud-core').Telnet;
 const { TelnetSocket } = require('whispermud-core').Telnet;
+const { Sequences } = require('whispermud-core');
+const { Options } = require('whispermud-core');
 const { Logger } = require('whispermud-core');
 const TelnetStream = require('../lib/TelnetStream');
 
@@ -14,7 +16,7 @@ module.exports = {
       let server = new TelnetServer(rawSocket => {
         let telnetSocket = new TelnetSocket();
         telnetSocket.attach(rawSocket);
-        telnetSocket.telnetCommand(Telnet.Sequences.WILL, Telnet.Options.OPT_EOR);
+        telnetSocket.telnetCommand(Sequences.WILL, Options.OPT_EOR);
 
         const stream = new TelnetStream();
         stream.attach(telnetSocket);
