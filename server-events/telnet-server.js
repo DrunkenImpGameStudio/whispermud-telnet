@@ -1,6 +1,7 @@
 'use strict';
 
-const { Telnet } = require('whispermud-core');
+const { TelnetServer } = require('whispermud-core').Telnet;
+const { TelnetSocket } = require('whispermud-core').Telnet;
 const { Logger } = require('whispermud-core');
 const TelnetStream = require('../lib/TelnetStream');
 
@@ -10,8 +11,8 @@ module.exports = {
       /**
       * Effectively the 'main' game loop but not really because it's a REPL
       */
-      let server = new Telnet.TelnetServer(rawSocket => {
-        let telnetSocket = new Telnet.TelnetSocket();
+      let server = new TelnetServer(rawSocket => {
+        let telnetSocket = new TelnetSocket();
         telnetSocket.attach(rawSocket);
         telnetSocket.telnetCommand(Telnet.Sequences.WILL, Telnet.Options.OPT_EOR);
 
