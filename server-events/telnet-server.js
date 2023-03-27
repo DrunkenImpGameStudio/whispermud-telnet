@@ -1,10 +1,8 @@
 'use strict';
 
-const { TelnetServer } = require('whispermud-core').Telnet;
-const { TelnetSocket } = require('whispermud-core').Telnet;
-const { Sequences } = require('whispermud-core');
-const { Options } = require('whispermud-core');
-const { Logger } = require('whispermud-core');
+const Sequences = require('whispermud-core').TelnetSequences;
+const Options = require('whispermud-core').TelnetOptions;
+const { Logger, TelnetSocket, TelnetServer } = require('whispermud-core');
 const TelnetStream = require('../lib/TelnetStream');
 
 module.exports = {
