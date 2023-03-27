@@ -1,7 +1,7 @@
 'use strict';
 
-const { TelnetServer } = require('whispermud-core').TelnetServer;
-const { TelnetSocket } = require('whispermud-core').TelnetSocket;
+const { TelnetServer } = require('whispermud-core');
+const { TelnetSocket } = require('whispermud-core').Telnet;
 const { Sequences } = require('whispermud-core');
 const { Options } = require('whispermud-core');
 const { Logger } = require('whispermud-core');
