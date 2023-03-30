@@ -14,18 +14,10 @@ module.exports = {
       let server = new TelnetServer(rawSocket => {
         let telnetSocket = new TelnetSocket();
         telnetSocket.attach(rawSocket);
-        telnetSocket.telnetCommand(Sequences.WILL, Array(Options.OPT_EOR, Options.OPT_GMCP));
+        telnetSocket.telnetCommand(Sequences.WILL, Options.OPT_EOR);
 
         const stream = new TelnetStream();
         stream.attach(telnetSocket);
-
-        stream.on('DO', option => {
-          switch (option) {
-            case Options.OPT_GMCP:
-              Logger.log("Using GMCP")
-              break;
-          }
-        });
 
         stream.on('interrupt', () => {
           stream.write("\n*interrupt*\n");
