@@ -19,6 +19,14 @@ module.exports = {
         const stream = new TelnetStream();
         stream.attach(telnetSocket);
 
+        stream.on('DO', option => {
+          switch (option) {
+            case Options.OPT_GMCP:
+              Logger.log("Using GMCP")
+              break;
+          }
+        });
+
         stream.on('interrupt', () => {
           stream.write("\n*interrupt*\n");
         });
