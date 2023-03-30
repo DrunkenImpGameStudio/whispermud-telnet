@@ -14,8 +14,7 @@ module.exports = {
       let server = new TelnetServer(rawSocket => {
         let telnetSocket = new TelnetSocket();
         telnetSocket.attach(rawSocket);
-        telnetSocket.telnetCommand(Sequences.WILL, Options.OPT_EOR);
-        telnetSocket.telnetCommand(Sequences.WILL, Options.OPT_GMCP);
+        telnetSocket.telnetCommand(Sequences.WILL, Array(Options.OPT_EOR, Options.OPT_GMCP));
 
         const stream = new TelnetStream();
         stream.attach(telnetSocket);
